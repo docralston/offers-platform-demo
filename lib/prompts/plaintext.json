@@ -1,0 +1,236 @@
+{
+  "AI Router (Full)": {
+    "prefix": "airoute",
+    "body": [
+      "You are my AI Tool Router for coding + automation work.",
+      "",
+      "Goal: choose the cheapest capable tool (ChatGPT | Gemini Pro | Continue.dev | Claude Code) and rewrite my task as an optimized prompt for that tool.",
+      "",
+      "Rules of thumb:",
+      "- ChatGPT: architecture, logic, regex, data modeling, planning.",
+      "- Gemini Pro: large document ingestion, transformations, bulk parsing.",
+      "- Continue.dev: IDE edits with tight scope (single/few files), quick iteration.",
+      "- Claude Code: only if multi-file refactor/debugging truly needs deep repo context.",
+      "",
+      "Output in this exact structure:",
+      "A) Task classification: category / risk / context needed",
+      "B) Recommended tool + 3 bullet why + burn risk",
+      "C) Ask vs Assume (max 3 questions or list assumptions)",
+      "D) Optimized prompt (copy/paste ready for the chosen tool)",
+      "E) Second-best prompt (if I insist on another tool)",
+      "",
+      "TASK:",
+      "${1:Paste task here}"
+    ],
+    "description": "Routes work to the best tool and produces an optimized prompt."
+  },
+
+  "AI Router (Lite)": {
+    "prefix": "airoute-lite",
+    "body": [
+      "Pick the cheapest capable tool (ChatGPT | Gemini Pro | Continue.dev | Claude Code) and rewrite my task as an optimized prompt for it.",
+      "",
+      "Task:",
+      "${1:Paste task here}"
+    ],
+    "description": "Minimal router."
+  },
+
+  "Continue.dev (Scoped Edit - Single File)": {
+    "prefix": "aiedit",
+    "body": [
+      "You are editing ONE file only: ${1:relative/path/to/file.ts}.",
+      "Do not scan the whole repo. Do not change unrelated files.",
+      "",
+      "Goal:",
+      "${2:Describe the change}",
+      "",
+      "Constraints:",
+      "- Return a patch/diff or clearly show exact edits.",
+      "- Preserve existing style and naming.",
+      "- If you need more context, ask for the smallest snippet.",
+      "",
+      "Acceptance checks:",
+      "- TypeScript types compile (no new errors).",
+      "- No behavior change outside described goal."
+    ],
+    "description": "Tight, low-burn Continue edit prompt."
+  },
+
+  "Continue.dev (Few Files Refactor)": {
+    "prefix": "aiedit2",
+    "body": [
+      "You may edit ONLY these files:",
+      "- ${1:path/one.ts}",
+      "- ${2:path/two.ts}",
+      "- ${3:path/three.ts}",
+      "",
+      "Goal:",
+      "${4:Describe the refactor}",
+      "",
+      "Rules:",
+      "- Do not touch any other files.",
+      "- Output a patch/diff per file.",
+      "- Keep changes minimal; explain any breaking change risk."
+    ],
+    "description": "Constrained multi-file edits without repo-wide wandering."
+  },
+
+  "Claude Code (Hard Mode Refactor - Guardrails)": {
+    "prefix": "claude-hard",
+    "body": [
+      "You are Claude Code. This task is allowed to be multi-file, but you must minimize context usage.",
+      "",
+      "Guardrails:",
+      "- Start by listing exactly which files you plan to read and why (max 8).",
+      "- Prefer smallest viable change set.",
+      "- Produce a step-by-step plan, then a patch/diff.",
+      "",
+      "Task:",
+      "${1:Paste task here}",
+      "",
+      "Known constraints / must-not-break:",
+      "${2:List constraints}"
+    ],
+    "description": "Use when you truly need Claude Code’s depth—while limiting burn."
+  },
+
+  "Gemini Pro (Bulk Parse -> Structured Output)": {
+    "prefix": "gem-parse",
+    "body": [
+      "You are Gemini Pro. Convert the input into structured data.",
+      "",
+      "Output requirements:",
+      "- Return valid JSON only (no commentary).",
+      "- Use this schema exactly:",
+      "${1:{\"items\":[{\"type\":\"lease|finance|cash\",\"make\":\"\",\"model\":\"\",\"year\":0,\"trim\":\"\",\"termMonths\":0,\"apr\":0,\"payment\":0,\"dueAtSigning\":0,\"msrp\":0,\"discount\":0,\"startDate\":\"\",\"endDate\":\"\",\"conditions\":[]}]}}",
+      "- If a field is unknown, use null (do not guess).",
+      "- Capture edge cases and multiple offers per model/trim as separate items.",
+      "",
+      "INPUT:",
+      "${2:Paste the doc text / HTML / PDF text here}"
+    ],
+    "description": "Cheap, reliable bulk extraction template."
+  },
+
+  "ChatGPT (Architecture / Plan w Acceptance Criteria)": {
+    "prefix": "gpt-plan",
+    "body": [
+      "Act as a senior engineer. Produce a build plan with acceptance criteria.",
+      "",
+      "Project context:",
+      "- Stack: Node/Next.js/TypeScript + Prisma/Postgres",
+      "- Goal: automation-heavy app (scrapers/parsers/JSON pipelines/email generation)",
+      "",
+      "Task:",
+      "${1:Paste task here}",
+      "",
+      "Deliverables:",
+      "1) Short architecture overview (components + data flow)",
+      "2) Step-by-step implementation plan (phased)",
+      "3) Acceptance criteria checklist",
+      "4) Risks + mitigations",
+      "5) Minimal test plan"
+    ],
+    "description": "Planning prompt that prevents expensive agent flailing."
+  },
+
+  "Debug (Logs -> Hypothesis -> Fix)": {
+    "prefix": "aidebug",
+    "body": [
+      "You are debugging. Use this structure: Symptoms -> Likely causes -> Tests -> Fix -> Verification.",
+      "",
+      "Environment:",
+      "${1:OS/Node version/framework/DB etc.}",
+      "",
+      "Error / logs:",
+      "${2:Paste logs here}",
+      "",
+      "Relevant code (smallest snippet):",
+      "${3:Paste snippet here}",
+      "",
+      "Constraints:",
+      "- Provide the smallest safe fix first.",
+      "- Include how to verify the fix."
+    ],
+    "description": "Debug template that keeps models focused."
+  },
+
+  "Regex / Parsing Rule Builder": {
+    "prefix": "airegex",
+    "body": [
+      "Create a robust regex (or parsing logic if regex is fragile).",
+      "",
+      "Input examples (include 5-10):",
+      "${1:Paste examples here}",
+      "",
+      "Output needed:",
+      "- Regex (and flags) OR parsing function",
+      "- Explanation of groups",
+      "- Test cases (pass/fail)",
+      "- Common failure modes"
+    ],
+    "description": "Regex + tests prompt."
+  },
+
+  "Prisma / DB Change (Migration-Safe)": {
+    "prefix": "aiprisma",
+    "body": [
+      "Design a Prisma schema change + migration plan.",
+      "",
+      "Current schema snippet:",
+      "${1:Paste Prisma models here}",
+      "",
+      "Change request:",
+      "${2:Describe change}",
+      "",
+      "Deliverables:",
+      "1) Updated Prisma model(s)",
+      "2) Migration notes (data backfill, default values, constraints)",
+      "3) Any required API changes",
+      "4) Verification steps"
+    ],
+    "description": "DB-safe changes template."
+  },
+
+  "Scraper Task (HTML -> Selectors -> Extraction Plan)": {
+    "prefix": "aiscrape",
+    "body": [
+      "Given the HTML, produce a stable extraction plan.",
+      "",
+      "Constraints:",
+      "- Prefer resilient selectors",
+      "- Handle missing fields gracefully",
+      "- Output a mapping table: field -> selector -> transform/regex",
+      "",
+      "Fields needed:",
+      "${1:List fields here}",
+      "",
+      "HTML sample:",
+      "${2:Paste HTML here}"
+    ],
+    "description": "Scraper mapping prompt."
+  },
+
+  "Code Review (Diff-Oriented)": {
+    "prefix": "aicr",
+    "body": [
+      "Review this change like a strict senior engineer.",
+      "",
+      "Focus on:",
+      "- correctness, edge cases, and data integrity",
+      "- performance pitfalls",
+      "- security concerns (secrets, injection, auth)",
+      "- maintainability",
+      "",
+      "Change (diff or snippet):",
+      "${1:Paste diff/snippet here}",
+      "",
+      "Output:",
+      "1) Blocking issues",
+      "2) Non-blocking improvements",
+      "3) Quick tests to run"
+    ],
+    "description": "Fast code review checklist."
+  }
+}

@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OfferStatus {
+  LIVE
+  INACTIVE
+}
+
+enum VehicleCondition {
+  NEW
+  USED
+  CERTIFIED
+}
+
+/// Explicit offer type: Lease | Finance | Cash | Other. Nullable for existing rows.
+enum OfferTypeEnum {
+  Lease
+  Finance
+  Cash
+  Other
+}
+
+/// Vehicle fuel / powertrain (for finance APR row matching and disclaimers).
+enum VehicleFuelType {
+  GAS
+  HYBRID
+  PLUG_IN_HYBRID
+}
+
+enum DisclaimerSource {
+  AUTO
+  MANUAL
+}
+
+model Offer {
+  id            String       @id @default(uuid())
+  storeCode     String       // primary/canonical store
+  storeCodes    String[]     @default([]) // when non-empty, offer applies to all listed stores; else treat as [storeCode]
+  externalId    String?      // set by Toyota ingestion; unique per storeCode for upsert
+  make          String?      // required only when condition is USED
+  model         String
+  /// High-level series grouping (e.g. "3 Series", "X5", "i4", "M Models")
+  series        String?
+  year          Int?         // optional for certified finance offers
+  trim          String?
+  modelCode     String?      // Toyota numeric code (e.g. "2557") or BMW local code (e.g. "262V")
+  /// When set, finance APR rows in financeRates should match this fuel class (or be untagged).
+  fuelType      VehicleFuelType?
+  condition     VehicleCondition @default(NEW)
+  startDate     DateTime     // When offer becomes active/published
+  endDate       DateTime     // When offer expires/unpublished
+  status        OfferStatus  @default(INACTIVE)
+
+  inventoryUrl  String?
+  imageUrl      String?
+
+  // Lease
+  leasePayment  Int?
+  leaseTerm     Int?
+  leaseMiles    Int?
+  dueAtSigning  Int?
+  capCostReduction Int?       // Lease cap cost reduction
+  grossCapCost  Int?          // Gross capitalized cost
+  netCapCost    Int?          // Net capitalized cost
+  securityDeposit Int?        // Security deposit
+  perExcessMile Decimal?      // Cost per mile over allowance (e.g. 0.25)
+  acquisitionFee Int?        // Acquisition fee
+  downPayment   Int?         // Down payment
+
+  // Buy
+  msrp          Int?
+  discount      Int?
+  buyFor        Int?
+  stockNumber   String?       // Stock #
+
+  // Offer type and APR (Finance)
+  offerType     OfferTypeEnum?
+  aprRate       Decimal?      // APR in percent units, e.g. 3.99 for 3.99% — "best" (lowest rate, longest term) for list/dashboard
+  aprTermMonths Int?          // e.g. 60
+  financeRates  Json?         // array of { aprRate, aprTermMonths }; only when offerType = Finance
+
+  // Rebates & incentives (stored as numbers, no $)
+  rebateTotal   Decimal?
+  customerCash  Decimal?
+  leaseCash     Decimal?
+  aprCash       Decimal?
+  bonusCash     Decimal?
+
+  // Text
+  disclaimer    String?       @db.Text  // long
+  disclaimerSource DisclaimerSource @default(AUTO)
+  additionalNotes String?     @db.Text  // medium
+
+  // Validation
+  validationIssues Json?       // Array of ValidationIssue objects
+
+  updatedBy     String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  versions      OfferVersion[]
+
+  @@unique([storeCode, externalId])
+  @@index([storeCode, status])
+  @@index([endDate])
+  @@index([startDate])
+  @@index([make, model, year])
+}
+
+model OfferVersion {
+  id            String   @id @default(uuid())
+  offerId       String
+  offer         Offer    @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  versionNumber Int
+  changedAt     DateTime @default(now())
+  changedBy     String
+  changeNote    String?
+  snapshot      Json     // full Offer snapshot
+
+  @@index([offerId, versionNumber])
+}
+
+model AppSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+}
+
+model OpenAIRequestLog {
+  id               String   @id @default(uuid())
+  createdAt        DateTime @default(now()) @map("created_at")
+  model            String
+  inputTokens      Int      @map("input_tokens")
+  outputTokens     Int      @map("output_tokens")
+  totalTokens      Int      @map("total_tokens")
+  durationMs       Int?     @map("duration_ms")
+  estimatedCostUsd Decimal  @map("estimated_cost_usd")
+  status           String
+  errorText        String?  @map("error_text")
+  openaiResponseId String?  @map("openai_response_id")
+  tags             Json     @map("tags")
+
+  @@map("openai_request_log")
+  @@index([createdAt])
+  @@index([model])
+  @@index([status])
+}
+

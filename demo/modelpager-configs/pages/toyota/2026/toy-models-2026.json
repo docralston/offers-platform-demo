@@ -1,0 +1,8 @@
+{
+  "models": [
+    { "displayName": "Camry", "category": "commuter sedan" },
+    { "displayName": "Corolla", "category": "commuter sedan" },
+    { "displayName": "RAV4", "category": "family SUV" },
+    { "displayName": "Prius", "category": "hybrid" }
+  ]
+}

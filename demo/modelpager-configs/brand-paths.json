@@ -1,0 +1,10 @@
+{
+  "defaults": {
+    "pagesUseStoreSubdir": false
+  },
+  "perBrand": {
+    "lexus": {
+      "pagesUseStoreSubdir": true
+    }
+  }
+}

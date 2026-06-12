@@ -1,0 +1,7 @@
+{
+  "models": [
+    { "displayName": "ES", "category": "luxury-sedan" },
+    { "displayName": "RX", "category": "luxury-suv" },
+    { "displayName": "NX", "category": "luxury-suv" }
+  ]
+}

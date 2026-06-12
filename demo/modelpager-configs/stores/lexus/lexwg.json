@@ -1,0 +1,44 @@
+{
+  "storeKey": "lexwg",
+  "brand": "Lexus",
+  "domain": "lexus-of-exampleville.example.com",
+  "siteUrl": "https://lexus-of-exampleville.example.com",
+  "dealerName": "Lexus of Exampleville",
+  "legalName": "Lexus of Exampleville",
+  "location": {
+    "address": "200 Example Plaza",
+    "city": "Exampleville",
+    "state": "PA",
+    "zip": "00001",
+    "county": "Example County"
+  },
+  "contact": {
+    "phone": "555-0103"
+  },
+  "branding": {
+    "accentColor": "#1a1a1a",
+    "theme": "lexus"
+  },
+  "links": {
+    "newInventory": "/inventory/new",
+    "usedInventory": "/inventory/used",
+    "service": "/service",
+    "scheduleService": "/service/appointment",
+    "finance": "/finance",
+    "trade": "/trade",
+    "specials": "/specials",
+    "contact": "/contact"
+  },
+  "schema": {
+    "includeLocalBusiness": false,
+    "includeBreadcrumbs": true,
+    "includeFAQPage": true,
+    "includeTrimsItemList": true
+  },
+  "seo": {
+    "serviceArea": ["Exampleville", "Nearbyville", "Sampleton"]
+  },
+  "assets": {
+    "r2BaseUrl": "/demo/assets"
+  }
+}

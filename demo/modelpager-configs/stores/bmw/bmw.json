@@ -1,0 +1,45 @@
+{
+  "storeKey": "bmw",
+  "brand": "BMW",
+  "domain": "bmw-of-demotown.example.com",
+  "siteUrl": "https://bmw-of-demotown.example.com",
+  "dealerName": "BMW of Demotown",
+  "legalName": "BMW of Demotown",
+  "location": {
+    "address": "100 Demo Plaza",
+    "city": "Demotown",
+    "state": "PA",
+    "zip": "00000",
+    "county": "Demo County"
+  },
+  "contact": {
+    "phone": "555-0101"
+  },
+  "branding": {
+    "accentColor": "#1C69D4",
+    "theme": "bmw-blue"
+  },
+  "links": {
+    "newInventory": "/inventory/new",
+    "usedInventory": "/inventory/used",
+    "service": "/service",
+    "scheduleService": "/service/appointment",
+    "finance": "/finance",
+    "trade": "/trade",
+    "specials": "/specials",
+    "performance": "/performance",
+    "contact": "/contact"
+  },
+  "schema": {
+    "includeLocalBusiness": false,
+    "includeBreadcrumbs": true,
+    "includeFAQPage": true,
+    "includeTrimsItemList": true
+  },
+  "seo": {
+    "serviceArea": ["Demotown", "Nearbyville", "Sampleton"]
+  },
+  "assets": {
+    "r2BaseUrl": "/demo/assets"
+  }
+}

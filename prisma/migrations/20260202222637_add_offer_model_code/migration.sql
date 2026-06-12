@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Offer" ALTER COLUMN "year" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP DEFAULT;

@@ -1,0 +1,7 @@
+{
+  "models": [
+    { "displayName": "3 Series", "category": "luxury-sedan" },
+    { "displayName": "X5", "category": "luxury-suv" },
+    { "displayName": "i4", "category": "electric" }
+  ]
+}

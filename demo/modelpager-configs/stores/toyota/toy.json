@@ -1,0 +1,44 @@
+{
+  "storeKey": "toy",
+  "brand": "Toyota",
+  "domain": "toyota-of-demotown.example.com",
+  "siteUrl": "https://toyota-of-demotown.example.com",
+  "dealerName": "Toyota of Demotown",
+  "legalName": "Toyota of Demotown",
+  "location": {
+    "address": "100 Demo Plaza",
+    "city": "Demotown",
+    "state": "PA",
+    "zip": "00000",
+    "county": "Demo County"
+  },
+  "contact": {
+    "phone": "555-0100"
+  },
+  "branding": {
+    "accentColor": "#EB0A1E",
+    "theme": "toyota-red"
+  },
+  "links": {
+    "newInventory": "/inventory/new",
+    "usedInventory": "/inventory/used",
+    "service": "/service",
+    "scheduleService": "/service/appointment",
+    "finance": "/finance",
+    "trade": "/trade",
+    "specials": "/specials",
+    "contact": "/contact"
+  },
+  "schema": {
+    "includeLocalBusiness": false,
+    "includeBreadcrumbs": true,
+    "includeFAQPage": true,
+    "includeTrimsItemList": true
+  },
+  "seo": {
+    "serviceArea": ["Demotown", "Nearbyville", "Sampleton"]
+  },
+  "assets": {
+    "r2BaseUrl": "/demo/assets"
+  }
+}

@@ -1,0 +1,44 @@
+name: LLM pricing reminder
+
+on:
+  schedule:
+    # 1st of Jan, Apr, Jul, Oct at 14:00 UTC
+    - cron: '0 14 1 1,4,7,10 *'
+  workflow_dispatch:
+
+jobs:
+  open-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '[ops] Refresh LLM pricing table';
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'maintenance',
+              per_page: 20,
+            });
+            if (issues.some((i) => i.title === title)) {
+              core.info('Open pricing reminder issue already exists — skipping');
+              return;
+            }
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              labels: ['maintenance'],
+              body: [
+                'Quarterly reminder to refresh estimated LLM costs.',
+                '',
+                'See `.github/ISSUE_TEMPLATE/pricing-checklist.md` for the full checklist.',
+                '',
+                '1. Update `lib/openai-pricing.ts` (`MODEL_PRICING_PER_1K`, `PRICING_AS_OF`)',
+                '2. `npm run test -- openai-pricing`',
+                '3. `npm run backfill:openai-costs -- --all` on production',
+              ].join('\n'),
+            });

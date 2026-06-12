@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root { {brand-css-vars} }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: {width}px;
+        height: {height}px;
+        overflow: hidden;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .banner--336x280 {
+        width: {width}px;
+        height: {height}px;
+        display: grid;
+        grid-template-rows: 118px 1fr auto;
+        background: linear-gradient(180deg, var(--theme-bg-2, #111827) 0%, var(--theme-bg-3, #0b0e14) 100%);
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      .banner--336x280 .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(100% 80% at 22% 36%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.1) 62%, rgba(255, 255, 255, 0) 80%),
+          radial-gradient(78% 58% at 80% 74%, rgba(203, 213, 225, 0.82) 0%, rgba(203, 213, 225, 0.06) 72%, rgba(203, 213, 225, 0) 86%),
+          radial-gradient(90% 88% at 92% 14%, rgba(241, 245, 249, 0.9) 0%, rgba(241, 245, 249, 0) 74%),
+          linear-gradient(140deg, #f8fafc 0%, #e5e7eb 48%, #cbd5e1 100%);
+      }
+      .banner--336x280 .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.22;
+        background-image:
+          radial-gradient(rgba(15, 23, 42, 0.28) 0.8px, transparent 0.8px),
+          radial-gradient(rgba(255, 255, 255, 0.35) 0.75px, transparent 0.75px);
+        background-size: 3px 3px, 5px 5px;
+        background-position: 0 0, 1px 1px;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+      .banner--336x280 .hero img {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: 50% 52%;
+        display: block;
+        padding: 6px 10px;
+        filter:
+          drop-shadow(0 4px 9px rgba(15, 23, 42, 0.22))
+          drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+      }
+      .banner--336x280 .hero-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0) 68%,
+          color-mix(in srgb, var(--theme-bg-2, #111827) 22%, rgba(17, 24, 39, 0.08)) 100%
+        );
+        pointer-events: none;
+      }
+      .banner--336x280 .panel {
+        padding: 10px 12px 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-height: 0;
+        background: var(--theme-bg-2, #111827);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .banner--336x280 .dealer {
+        margin: 0;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        line-height: 1.1;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.82));
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+      .banner--336x280 .headline {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: var(--theme-headline, #f8fafc);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .banner--336x280 .msrp-line {
+        margin: 0;
+        font-size: 10px;
+        line-height: 1.2;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.84));
+      }
+      .banner--336x280 .offers {
+        display: grid;
+        gap: 5px;
+        min-height: 0;
+      }
+      .banner--336x280 .offer {
+        border: 1px solid var(--theme-panel-border, rgba(255, 255, 255, 0.12));
+        border-radius: 6px;
+        padding: 5px 8px 6px;
+        background: var(--theme-panel, rgba(255, 255, 255, 0.06));
+      }
+      .banner--336x280 .offer-top {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 8px;
+      }
+      .banner--336x280 .offer-main { display: contents; }
+      .banner--336x280 .pill {
+        font-size: 9px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .banner--336x280 .pill-lease {
+        background: rgba(14, 165, 233, 0.2);
+        color: #7dd3fc;
+        border: 1px solid rgba(14, 165, 233, 0.35);
+      }
+      .banner--336x280 .pill-finance {
+        background: rgba(34, 197, 94, 0.15);
+        color: #86efac;
+        border: 1px solid rgba(34, 197, 94, 0.35);
+      }
+      .banner--336x280 .price {
+        display: block;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        font-size: 19px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--theme-price, #ffffff);
+      }
+      .banner--336x280 .offer-sub,
+      .banner--336x280 .offer-sub-line {
+        display: inline;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        font-size: 9px;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.78));
+        line-height: 1.22;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+      .banner--336x280 .offer-sub { display: block; }
+      .banner--336x280 .cta-btn {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 32px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-radius: 5px;
+        background: var(--theme-cta-bg, #ffffff);
+        color: var(--theme-cta-fg, #0f172a);
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.32);
+      }
+      .banner--336x280 .legal {
+        font-size: 7px;
+        line-height: 1.22;
+        color: rgba(248, 250, 252, 0.48);
+        padding: 5px 10px 6px;
+        background: rgba(0, 0, 0, 0.55);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="banner banner--336x280">
+      <div class="hero">
+        <img src="{vehicle-image}" alt="{title}" />
+        <div class="hero-scrim"></div>
+      </div>
+      <div class="panel">
+        <p class="dealer">{store-name}</p>
+        <h1 class="headline">{title}</h1>
+        <p class="msrp-line">{msrp}</p>
+        <div class="offers">{offers}</div>
+        <div class="cta-btn">{cta}</div>
+      </div>
+      <div class="legal" {disclaimer-style}>{disclaimer}</div>
+    </article>
+  </body>
+</html>

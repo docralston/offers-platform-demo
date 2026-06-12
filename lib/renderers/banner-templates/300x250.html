@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root { {brand-css-vars} }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: {width}px;
+        height: {height}px;
+        overflow: hidden;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .banner--300x250 {
+        width: {width}px;
+        height: {height}px;
+        display: grid;
+        grid-template-rows: 98px 1fr auto;
+        background: linear-gradient(180deg, var(--theme-bg-2, #111827) 0%, var(--theme-bg-3, #0b0e14) 100%);
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      .banner--300x250 .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(100% 78% at 22% 36%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.1) 62%, rgba(255, 255, 255, 0) 80%),
+          radial-gradient(78% 58% at 78% 76%, rgba(203, 213, 225, 0.8) 0%, rgba(203, 213, 225, 0.06) 72%, rgba(203, 213, 225, 0) 86%),
+          linear-gradient(140deg, #f8fafc 0%, #e5e7eb 48%, #cbd5e1 100%);
+      }
+      .banner--300x250 .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.22;
+        background-image:
+          radial-gradient(rgba(15, 23, 42, 0.28) 0.75px, transparent 0.75px),
+          radial-gradient(rgba(255, 255, 255, 0.35) 0.7px, transparent 0.7px);
+        background-size: 3px 3px, 5px 5px;
+        background-position: 0 0, 1px 1px;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+      .banner--300x250 .hero img {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: 50% 52%;
+        display: block;
+        padding: 4px 8px;
+        filter:
+          drop-shadow(0 3px 7px rgba(15, 23, 42, 0.22))
+          drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+      }
+      .banner--300x250 .hero-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0) 65%,
+          color-mix(in srgb, var(--theme-bg-2, #111827) 20%, rgba(17, 24, 39, 0.08)) 100%
+        );
+        pointer-events: none;
+      }
+      .banner--300x250 .panel {
+        padding: var(--banner-pad, 8px) calc(var(--banner-pad, 8px) + 2px);
+        display: flex;
+        flex-direction: column;
+        gap: var(--banner-gap, 4px);
+        min-height: 0;
+        background: var(--theme-bg-2, #111827);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .banner--300x250 .dealer {
+        margin: 0;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        line-height: 1.1;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.8));
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+      .banner--300x250 .headline {
+        margin: 0;
+        font-size: var(--banner-title-size, 13px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.08;
+        color: var(--theme-headline, #f8fafc);
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .banner--300x250 .msrp-line {
+        margin: 0;
+        font-size: 9px;
+        line-height: 1.2;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.82));
+      }
+      .banner--300x250 .offers {
+        display: grid;
+        gap: 4px;
+        min-height: 0;
+      }
+      .banner--300x250 .offer {
+        border: 1px solid var(--theme-panel-border, rgba(255, 255, 255, 0.12));
+        border-radius: 5px;
+        padding: 4px 7px 5px;
+        background: var(--theme-panel, rgba(255, 255, 255, 0.05));
+      }
+      .banner--300x250 .offer-top {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 6px;
+      }
+      .banner--300x250 .offer-main { display: contents; }
+      .banner--300x250 .pill {
+        font-size: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      .banner--300x250 .pill-lease {
+        background: rgba(14, 165, 233, 0.2);
+        color: #7dd3fc;
+        border: 1px solid rgba(14, 165, 233, 0.35);
+      }
+      .banner--300x250 .pill-finance {
+        background: rgba(34, 197, 94, 0.15);
+        color: #86efac;
+        border: 1px solid rgba(34, 197, 94, 0.35);
+      }
+      .banner--300x250 .price {
+        display: block;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--theme-price, #ffffff);
+      }
+      .banner--300x250 .offer-sub,
+      .banner--300x250 .offer-sub-line {
+        display: inline;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        font-size: 8px;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.72));
+        line-height: 1.22;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+      .banner--300x250 .offer-sub { display: block; }
+      .banner--300x250 .cta-btn {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 28px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-radius: 4px;
+        background: var(--theme-cta-bg, #ffffff);
+        color: var(--theme-cta-fg, #0f172a);
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
+      }
+      .banner--300x250 .legal {
+        font-size: 7px;
+        line-height: 1.22;
+        color: rgba(248, 250, 252, 0.48);
+        padding: 4px 8px 5px;
+        background: rgba(0, 0, 0, 0.55);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="banner banner--300x250">
+      <div class="hero">
+        <img src="{vehicle-image}" alt="{title}" />
+        <div class="hero-scrim"></div>
+      </div>
+      <div class="panel">
+        <p class="dealer">{store-name}</p>
+        <h1 class="headline">{title}</h1>
+        <p class="msrp-line">{msrp}</p>
+        <div class="offers">{offers}</div>
+        <div class="cta-btn">{cta}</div>
+      </div>
+      <div class="legal" {disclaimer-style}>{disclaimer}</div>
+    </article>
+  </body>
+</html>

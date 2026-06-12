@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root { {brand-css-vars} }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: {width}px;
+        height: {height}px;
+        overflow: hidden;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .banner--1080x1080 {
+        width: {width}px;
+        height: {height}px;
+        display: grid;
+        grid-template-rows: 600px 1fr auto;
+        background: linear-gradient(180deg, var(--theme-bg-2, #111827) 0%, var(--theme-bg-3, #0b0e14) 100%);
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+      .banner--1080x1080 .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(100% 78% at 22% 34%, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.1) 58%, rgba(255, 255, 255, 0) 80%),
+          radial-gradient(82% 62% at 80% 74%, rgba(203, 213, 225, 0.85) 0%, rgba(203, 213, 225, 0.06) 72%, rgba(203, 213, 225, 0) 86%),
+          radial-gradient(92% 92% at 92% 14%, rgba(241, 245, 249, 0.92) 0%, rgba(241, 245, 249, 0) 74%),
+          linear-gradient(145deg, #f8fafc 0%, #e5e7eb 46%, #cbd5e1 100%);
+      }
+      .banner--1080x1080 .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.2;
+        background-image:
+          radial-gradient(rgba(15, 23, 42, 0.3) 1.2px, transparent 1.2px),
+          radial-gradient(rgba(255, 255, 255, 0.4) 1.1px, transparent 1.1px);
+        background-size: 7px 7px, 10px 10px;
+        background-position: 0 0, 2px 2px;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+      .banner--1080x1080 .hero img {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: 50% 52%;
+        display: block;
+        padding: 36px 42px;
+        filter:
+          drop-shadow(0 18px 32px rgba(15, 23, 42, 0.22))
+          drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+      }
+      .banner--1080x1080 .hero-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0) 70%,
+          color-mix(in srgb, var(--theme-bg-2, #111827) 22%, rgba(17, 24, 39, 0.1)) 100%
+        );
+        pointer-events: none;
+      }
+      .banner--1080x1080 .panel {
+        padding: 36px 48px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: linear-gradient(180deg, var(--theme-bg-2, #111827) 0%, var(--theme-bg-3, #0b0e14) 100%);
+        min-height: 0;
+        overflow: hidden;
+      }
+      .banner--1080x1080 .dealer {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        line-height: 1.1;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.88));
+        white-space: normal;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+      .banner--1080x1080 .headline {
+        margin: 0;
+        font-size: 58px;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        color: var(--theme-headline, #f8fafc);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .banner--1080x1080 .msrp-line {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.1;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.82));
+      }
+      .banner--1080x1080 .offers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .banner--1080x1080 .offers:has(> .offer:only-child) {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .banner--1080x1080 .offer {
+        border: 1px solid var(--theme-panel-border, rgba(255, 255, 255, 0.14));
+        border-radius: 14px;
+        padding: 14px 18px 16px;
+        background: var(--theme-panel, rgba(255, 255, 255, 0.06));
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      }
+      .banner--1080x1080 .offer-top {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .banner--1080x1080 .offer-main {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .banner--1080x1080 .pill {
+        align-self: flex-start;
+        font-size: 16px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 5px 12px;
+        border-radius: 6px;
+      }
+      .banner--1080x1080 .pill-lease {
+        background: rgba(14, 165, 233, 0.2);
+        color: #7dd3fc;
+        border: 1px solid rgba(14, 165, 233, 0.45);
+      }
+      .banner--1080x1080 .pill-finance {
+        background: rgba(34, 197, 94, 0.16);
+        color: #86efac;
+        border: 1px solid rgba(34, 197, 94, 0.45);
+      }
+      .banner--1080x1080 .price {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        color: var(--theme-price, #ffffff);
+      }
+      .banner--1080x1080 .offer-sub {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .banner--1080x1080 .offer-sub-line {
+        display: block;
+        font-size: 16px;
+        line-height: 1.22;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.72));
+      }
+      .banner--1080x1080 .cta-row {
+        margin-top: auto;
+      }
+      .banner--1080x1080 .cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 78px;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border-radius: 12px;
+        background: var(--theme-cta-bg, #ffffff);
+        color: var(--theme-cta-fg, #0f172a);
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+      }
+      .banner--1080x1080 .legal {
+        font-size: 13px;
+        line-height: 1.28;
+        color: rgba(248, 250, 252, 0.52);
+        padding: 12px 28px 14px;
+        background: rgba(0, 0, 0, 0.58);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="banner banner--1080x1080">
+      <div class="hero">
+        <img src="{vehicle-image}" alt="{title}" />
+        <div class="hero-scrim"></div>
+      </div>
+      <div class="panel">
+        <p class="dealer">{store-name}</p>
+        <h1 class="headline">{title}</h1>
+        <p class="msrp-line">{msrp}</p>
+        <div class="offers">{offers}</div>
+        <div class="cta-row">
+          <div class="cta-btn">{cta}</div>
+        </div>
+      </div>
+      <div class="legal" {disclaimer-style}>{disclaimer}</div>
+    </article>
+  </body>
+</html>

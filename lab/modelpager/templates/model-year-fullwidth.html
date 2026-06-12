@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Builder overwrites these per page -->
+  <title></title>
+  <meta name="description" content="" />
+  <link rel="canonical" href="" />
+
+  <style>
+    .tto-scope {
+      all: initial;
+      display: block;
+      --tto-accent: #EB0A1E;
+      --tto-ink: #111827;
+      --tto-black: #000000;
+      --tto-muted: #6b7280;
+      --tto-bg: #ffffff;
+      --tto-surface: #f3f4f6;
+      --tto-line: rgba(17, 24, 39, .12);
+      --tto-shadow: 0 10px 26px rgba(0, 0, 0, .10);
+      --tto-radius: 12px;
+      --tto-font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --tto-hfont: var(--tto-font);
+      font-family: var(--tto-font);
+      color: var(--tto-ink);
+      background: var(--tto-bg);
+    }
+
+    .tto-scope *,
+    .tto-scope *::before,
+    .tto-scope *::after {
+      box-sizing: border-box;
+    }
+
+    .tto-scope img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .tto-scope a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .tto-scope strong {
+      font-weight: 700;
+    }
+
+    .tto-scope p {
+      margin: 12px 0;
+      line-height: 1.6;
+      color: var(--tto-ink);
+    }
+
+    .tto-scope ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tto-scope h1,
+    .tto-scope h2,
+    .tto-scope h3 {
+      margin: 0;
+      font-family: var(--tto-hfont);
+    }
+
+    .tto-page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 18px 34px;
+    }
+
+    .tto-hero {
+      position: relative;
+      border-radius: var(--tto-radius);
+      overflow: hidden;
+      box-shadow: var(--tto-shadow);
+      background: var(--tto-black);
+    }
+
+    .tto-hero-stack .tto-hero-bg {
+      position: relative;
+    }
+
+    .tto-hero-stack .tto-hero-img {
+      height: 420px;
+    }
+
+    @media (max-width: 680px) {
+      .tto-hero-stack .tto-hero-img {
+        height: 320px;
+      }
+    }
+
+    .tto-hero-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .tto-hero-img {
+        height: 320px;
+      }
+    }
+
+    .tto-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, .75) 0%, rgba(0, 0, 0, .45) 48%, rgba(0, 0, 0, .15) 100%);
+      display: none !important;
+    }
+
+    .tto-hero-inner {
+      position: relative;
+      padding: 34px 26px;
+      max-width: 860px;
+    }
+
+    @media (min-width:980px) {
+      .tto-hero-inner {
+        padding: 40px 34px;
+      }
+    }
+
+    .tto-kicker {
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      color: rgba(255, 255, 255, .85)!important;
+    }
+
+    .tto-h1 {
+      font-size: 40px;
+      line-height: 1.1;
+      margin: 0 0 12px;
+      color: rgba(255, 255, 255, 1)!important;
+    }
+
+    @media (max-width:520px) {
+      .tto-h1 {
+        font-size: 32px;
+      }
+    }
+
+    .tto-subhead {
+      font-size: 16px;
+      margin: 0 0 18px;
+      max-width: 72ch;
+      color: rgba(255, 255, 255, .88)!important;
+    }
+
+    .tto-hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tto-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      text-decoration: none !important;
+    }
+
+    .tto-btn-primary {
+      background: var(--tto-accent);
+      color: #fff !important;
+    }
+
+    .tto-btn-outline {
+      background: #fff;
+      border-color: var(--tto-line);
+      color: var(--tto-ink);
+    }
+
+    .tto-hero-fine {
+      margin: 10px 0 0;
+      font-size: 12px;
+      opacity: .9;
+      color: rgba(255, 255, 255, .85)!important;
+    }
+
+    .tto-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (min-width:980px) {
+      .tto-layout {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    /* Force consistent vertical spacing between sections (survives minifiers/build steps) */
+    .tto-main,
+    .tto-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Optional: if you want the aside media to participate cleanly */
+    .tto-aside .tto-media {
+      margin: 0;
+    }
+
+    /* Keep the original rule too as a harmless fallback */
+    .tto-card+.tto-card {
+      margin-top: 14px;
+    }
+
+    .tto-card {
+      background: var(--tto-bg);
+      border: 1px solid var(--tto-line);
+      border-radius: 10px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .03);
+      padding: 18px;
+    }
+
+    .tto-card-muted {
+      background: var(--tto-surface);
+    }
+
+    .tto-h2 {
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 12px !important;
+    }
+
+    .tto-h2-sm {
+      font-size: 18px;
+    }
+
+    .tto-body {
+      color: var(--tto-muted);
+    }
+
+    .tto-media {
+      margin: 14px 0 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--tto-line);
+      background: #e5e7eb;
+    }
+
+    .tto-media img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Why-it-fits: 2x2 on desktop; stack on mobile */
+    .tto-why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .tto-why-intro .tto-h2 {
+      margin-bottom: 8px !important;
+    }
+
+    .tto-why-grid .tto-checklist {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .tto-why-grid .tto-checklist li {
+      margin: 0 0 10px;
+    }
+
+    .tto-why-grid .tto-checklist li:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (min-width:980px) {
+      .tto-why-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 16px 18px;
+      }
+
+      .tto-why-intro {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: start;
+      }
+
+      .tto-why-media {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0;
+        align-self: start;
+      }
+
+      .tto-why-low--a {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: start;
+      }
+
+      .tto-why-low--b {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+      }
+    }
+
+    .tto-checklist li {
+      position: relative;
+      padding-left: 22px;
+      margin: 10px 0;
+      color: var(--tto-ink);
+    }
+
+    .tto-checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--tto-accent);
+      font-weight: 900;
+    }
+
+    .tto-checklist-compact li {
+      margin: 8px 0;
+    }
+
+    .tto-indicators {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 1px solid var(--tto-line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    @media (min-width:740px) {
+      .tto-indicators {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .tto-ind-col {
+      padding: 0;
+      border-right: 1px solid var(--tto-line);
+    }
+
+    .tto-ind-col:last-child {
+      border-right: none;
+    }
+
+    .tto-ind-title {
+      padding: 10px 12px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .tto-ind-title-accent {
+      background: var(--tto-accent);
+    }
+
+    .tto-ind-title-dark {
+      background: var(--tto-black);
+    }
+
+    .tto-ind-col ul {
+      padding: 10px 12px 12px;
+    }
+
+    .tto-linklist {
+      display: grid;
+      gap: 10px;
+      padding-top: 6px;
+    }
+
+    .tto-linklist a {
+      color: var(--tto-accent);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .tto-qa {
+      border-top: 1px solid var(--tto-line);
+      padding: 10px 0;
+    }
+
+    .tto-qa summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--tto-ink);
+    }
+
+    .tto-qa p {
+      margin-top: 8px;
+    }
+
+    .tto-lineup-crumb {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--tto-muted);
+    }
+
+    .tto-lineup-crumb a {
+      color: var(--tto-accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    body {
+      margin: 0;
+      background: #fafafa;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+  </style>
+
+  <!-- Builder injects JSON here -->
+</head>
+
+<body>
+  <section class="tto-scope" data-template="model">
+    <div class="tto-page">
+
+      <p class="tto-lineup-crumb">
+        <a data-tto="lineupText" data-tto-href="lineupHref" href="#"></a>
+      </p>
+
+      <header class="tto-hero tto-hero-stack">
+        <div class="tto-hero-bg">
+          <img class="tto-hero-img" data-tto="heroImg" alt="" loading="eager" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text='+encodeURIComponent(this.alt || 'Image')">
+        </div>
+        <div class="tto-hero-overlay"></div>
+
+        <div class="tto-hero-inner">
+          <p class="tto-kicker" data-tto="kicker"></p>
+
+          <h1 class="tto-h1" data-tto="h1"></h1>
+
+          <p class="tto-subhead" data-tto="heroSubhead"></p>
+
+          <div class="tto-hero-actions">
+            <a class="tto-btn tto-btn-primary" data-tto="inventoryAnchorHref" href="#inventory">View Inventory</a>
+            <a class="tto-btn tto-btn-outline" data-tto="leadHref" href="#tto_leadform">Get Pricing</a>
+          </div>
+
+          <p class="tto-hero-fine" data-tto="heroFine"></p>
+        </div>
+      </header>
+
+      <div class="tto-layout">
+        <main class="tto-main">
+
+          <section class="tto-card">
+            <div class="tto-why-grid">
+              <div class="tto-why-intro">
+                <h2 class="tto-h2" data-tto="whyHeading"></h2>
+                <ul class="tto-checklist" data-tto="whyBullet1"></ul>
+              </div>
+              <figure class="tto-why-media tto-media">
+                <img data-tto="vehicleJellybeanImg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text='+encodeURIComponent(this.alt || 'Image')">
+              </figure>
+              <div class="tto-why-low tto-why-low--a">
+                <ul class="tto-checklist" data-tto="whyBullet2"></ul>
+              </div>
+              <div class="tto-why-low tto-why-low--b">
+                <ul class="tto-checklist" data-tto="whyBullet3"></ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="tto-card">
+            <h2 class="tto-h2">Popular trims</h2>
+            <p class="tto-body" data-tto="trimsIntro"></p>
+            <div class="tto-indicators" data-tto="trims"></div>
+          </section>
+
+          <div data-tto="contentSections"></div>
+
+          <!-- Lead form anchor (your DDC widget uses this anchor) -->
+          <section class="tto-card tto-cta">
+            <h2 class="tto-h2" data-tto="ctaHeading"></h2>
+            <p class="tto-body">Tell us the trim you want and we’ll confirm availability.</p>
+            <div class="tto-hero-actions">
+              <a class="tto-btn tto-btn-primary" href="#tto_leadform">Request Pricing</a>
+              <a class="tto-btn tto-btn-outline" data-tto="contactHref" href="#">Contact Us</a>
+            </div>
+          </section>
+        </main>
+
+        <aside class="tto-aside">
+          <section class="tto-card tto-card-muted">
+            <h2 class="tto-h2 tto-h2-sm" data-tto="quickLinksHeading"></h2>
+            <nav class="tto-linklist">
+              <a data-tto="inventoryLinkText" data-tto-href="inventoryHref" href="#"></a>
+              <a data-tto="allNewLinkText" data-tto-href="allNewHref" href="#"></a>
+              <a data-tto="financeHref" href="#">Finance Center</a>
+              <a data-tto="tradeHref" href="#">Value Your Trade</a>
+            </nav>
+          </section>
+
+          <section class="tto-card tto-card-muted">
+            <h2 class="tto-h2 tto-h2-sm" data-tto="faqHeading"></h2>
+            <div data-tto="faqList"></div>
+          </section>
+
+          <section class="tto-card tto-card-muted">
+            <h2 class="tto-h2 tto-h2-sm">Local Info</h2>
+            <ul class="tto-checklist tto-checklist-compact">
+              <li><strong data-tto="localDealerName"></strong></li>
+              <li data-tto="localAddress"></li>
+              <li data-tto="localPhone"></li>
+              <li data-tto="localHours"></li>
+              <li data-tto="localServiceArea"></li>
+            </ul>
+          </section>
+
+          <figure class="tto-media">
+            <img data-tto="dealershipImg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text='+encodeURIComponent(this.alt || 'Image')">
+          </figure>
+        </aside>
+      </div>
+    </div>
+</section>
+  <!-- TTO_MICRODATA_INJECT -->
+</body>
+
+</html>

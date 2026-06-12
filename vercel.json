@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "app/**": {
+      "memory": 1769,
+      "maxDuration": 120
+    }
+  }
+}

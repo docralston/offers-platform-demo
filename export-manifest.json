@@ -1,0 +1,22 @@
+{
+  "exportedAt": "2026-06-12T21:18:32.476Z",
+  "sourceNote": "Sanitized export — do not merge back into private repo without review",
+  "filesSanitized": 27,
+  "excludedPaths": [
+    "scripts/run-toyota-ingestion.ts",
+    "scripts/debug-extract-endpoints.cjs",
+    "scripts/vercel-env-bulk.mjs",
+    "scripts/setup-demo-supabase-env.mjs",
+    ".github/workflows/toyota-ingestion.yml",
+    ".github/workflows/demo-db-reset.yml",
+    "lib/ingestion/bmw/__fixtures__/bmw-v2-sample.xlsx",
+    "appviewer.html",
+    "deps.json",
+    "ISSUES.md",
+    "tailwind.config.js",
+    "lib/ingestion/bmw/__fixtures__",
+    "tools/",
+    "docs/internal/"
+  ],
+  "skippedToyotaIngestion": true
+}

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      :root { {brand-css-vars} }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: {width}px;
+        height: {height}px;
+        overflow: hidden;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      }
+      .banner--970x90 {
+        width: {width}px;
+        height: {height}px;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(108deg, var(--theme-bg-1, #0a0c10) 0%, var(--theme-bg-2, #111827) 48%, var(--theme-bg-3, #0e1118) 100%);
+        color: #f8fafc;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      .banner--970x90 .band {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        min-height: 0;
+      }
+      .banner--970x90 .visual {
+        position: relative;
+        flex: 0 0 310px;
+        max-width: 310px;
+        background:
+          radial-gradient(95% 78% at 26% 36%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.06) 68%, rgba(255, 255, 255, 0) 82%),
+          radial-gradient(72% 64% at 78% 72%, rgba(203, 213, 225, 0.78) 0%, rgba(203, 213, 225, 0.05) 70%, rgba(203, 213, 225, 0) 84%),
+          radial-gradient(86% 86% at 88% 14%, rgba(241, 245, 249, 0.9) 0%, rgba(241, 245, 249, 0) 74%),
+          linear-gradient(138deg, #f8fafc 0%, #e5e7eb 46%, #cbd5e1 100%);
+        overflow: hidden;
+      }
+      .banner--970x90 .visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0.22;
+        background-image:
+          radial-gradient(rgba(15, 23, 42, 0.28) 0.75px, transparent 0.75px),
+          radial-gradient(rgba(255, 255, 255, 0.35) 0.7px, transparent 0.7px);
+        background-size: 3px 3px, 5px 5px;
+        background-position: 0 0, 1px 1px;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+      .banner--970x90 .visual img {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: 54% center;
+        display: block;
+        padding: 2px 0;
+        filter:
+          drop-shadow(0 2px 5px rgba(15, 23, 42, 0.22))
+          drop-shadow(0 0 3px rgba(255, 255, 255, 0.35));
+      }
+      .banner--970x90 .visual-scrim {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03) 0%,
+          color-mix(in srgb, var(--theme-bg-2, #111827) 24%, rgba(17, 24, 39, 0.08)) 100%
+        );
+        pointer-events: none;
+      }
+      .banner--970x90 .main {
+        flex: 0 0 230px;
+        min-width: 0;
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        background: var(--theme-bg-2, #111827);
+      }
+      .banner--970x90 .headline {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        color: var(--theme-headline, #f8fafc);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .banner--970x90 .msrp-line {
+        margin: 0;
+        font-size: 10px;
+        line-height: 1.15;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.82));
+      }
+      .banner--970x90 .offers {
+        flex: 0 0 280px;
+        display: grid;
+        gap: 4px;
+        padding: 6px 10px;
+        align-content: center;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--theme-bg-2, #111827);
+      }
+      .banner--970x90 .offer {
+        border: 1px solid var(--theme-panel-border, rgba(255, 255, 255, 0.12));
+        border-radius: 5px;
+        padding: 4px 8px 5px;
+        background: var(--theme-panel, rgba(255, 255, 255, 0.06));
+      }
+      .banner--970x90 .offer-top {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        gap: 6px;
+      }
+      .banner--970x90 .offer-main { display: contents; }
+      .banner--970x90 .pill {
+        font-size: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .banner--970x90 .pill-lease {
+        background: rgba(14, 165, 233, 0.2);
+        color: #7dd3fc;
+        border: 1px solid rgba(14, 165, 233, 0.35);
+      }
+      .banner--970x90 .pill-finance {
+        background: rgba(34, 197, 94, 0.15);
+        color: #86efac;
+        border: 1px solid rgba(34, 197, 94, 0.35);
+      }
+      .banner--970x90 .price {
+        display: block;
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--theme-price, #ffffff);
+      }
+      .banner--970x90 .offer-sub,
+      .banner--970x90 .offer-sub-line {
+        display: inline;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        font-size: 9px;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.78));
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+      .banner--970x90 .offer-sub { display: block; }
+      .banner--970x90 .rail {
+        flex: 0 0 150px;
+        max-width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 6px;
+        padding: 7px 10px;
+        background: var(--theme-bg-2, #111827);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .banner--970x90 .dealer {
+        margin: 0;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        line-height: 1.1;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--theme-copy, rgba(248, 250, 252, 0.84));
+        white-space: pre-line;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .banner--970x90 .cta-btn {
+        width: 100%;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 7px 8px;
+        border-radius: 4px;
+        background: var(--theme-cta-bg, #ffffff);
+        color: var(--theme-cta-fg, #0f172a);
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.32);
+      }
+      .banner--970x90 .legal {
+        flex-shrink: 0;
+        font-size: 7px;
+        line-height: 1.2;
+        color: rgba(248, 250, 252, 0.45);
+        padding: 3px 10px;
+        background: rgba(0, 0, 0, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="banner banner--970x90">
+      <div class="band">
+        <div class="visual">
+          <img src="{vehicle-image}" alt="{title}" />
+          <div class="visual-scrim"></div>
+        </div>
+        <div class="main">
+          <h1 class="headline">{title}</h1>
+          <p class="msrp-line">{msrp}</p>
+        </div>
+        <div class="offers">
+          {offers}
+        </div>
+        <div class="rail">
+          <p class="dealer">{store-name}</p>
+          <div class="cta-btn">{cta}</div>
+        </div>
+      </div>
+      <div class="legal" {disclaimer-style}>{disclaimer}</div>
+    </article>
+  </body>
+</html>

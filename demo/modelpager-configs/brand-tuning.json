@@ -1,0 +1,14 @@
+{
+  "defaults": {
+    "maxTokensPage": 3200,
+    "maxTokensFaqs": 1600,
+    "maxTokensLocal": 2200,
+    "maxRegenerationAttempts": 3
+  },
+  "perBrand": {
+    "bmw": {
+      "maxTokensPage": 3600,
+      "maxRegenerationAttempts": 2
+    }
+  }
+}
